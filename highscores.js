@@ -25,7 +25,7 @@ const goHome = () => {
 home.addEventListener('click', goHome)
 
 const clearList = () => {
-    localStorage.clear()
+    localStorage.removeItem("scores")
     window.location.href = 'highscores.html'
 }
 
