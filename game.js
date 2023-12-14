@@ -12,17 +12,43 @@ const aList = ["i++", "let i", "if", "options[1]"]
 const bList = ["i--", "var i", "if else", "options.0"]
 const cList = ["i**", "const i", "else if", "options.1"]
 const dList = ["--i", " for i", "else", "options[0]"]
+const scoreboard = localStorage.getItem("scores").split(',')
 let time = 75
 let questionNumber = 0
 let answer = "Switch"
 
+const gameOver = () => {
+    buttonA.style.display = 'none'
+    buttonB.style.display = 'none'
+    buttonC.style.display = 'none'
+    buttonD.style.display = 'none'
+    question.textContent = "Your final score is " + time + "!"
+    const prompt = document.createElement('p')
+    prompt.textContent = "Please enter your initials:"
+    const initials = document.createElement('textarea')
+    const submit = document.createElement('button')
+    submit.textContent = 'Enter'
+    question.appendChild(prompt)
+    question.appendChild(initials)
+    question.appendChild(submit)
+
+    const storeScore = () => {
+        scoreboard.push(time + " - " + initials.value)
+        localStorage.setItem("scores", scoreboard.join(','))
+
+        window.location.href = "index.HTML" //needs to change to high scores page
+    }
+
+    submit.addEventListener('click', storeScore)
+}
+
 const decrementTime = () =>{
-    time --
+    time--
     countdown.textContent = "Time: " + time
     if(time < 1){
         time = 0
         clearInterval(timer)
-        //go to game over screen
+        gameOver()
     }
 }
 let timer = window.setInterval(decrementTime, 1000)
@@ -36,20 +62,21 @@ const checkAnswer = (btn) =>{
         if(time < 1){
             time = 0
             clearInterval(timer)
-            //go to game over screen
+            gameOver()
         }
         countdown.textContent = "Time: " + time
     }
-    question.textContent = questionList[questionNumber]
-    buttonA.textContent = aList[questionNumber]
-    buttonB.textContent = bList[questionNumber]
-    buttonC.textContent = cList[questionNumber]
-    buttonD.textContent = dList[questionNumber]
-    answer = answerList[questionNumber]
-    questionNumber++
     if (questionNumber === questionList.length){
         clearInterval(timer)
-        //go to game over screen
+        gameOver()
+    }else{
+        question.textContent = questionList[questionNumber]
+        buttonA.textContent = aList[questionNumber]
+        buttonB.textContent = bList[questionNumber]
+        buttonC.textContent = cList[questionNumber]
+        buttonD.textContent = dList[questionNumber]
+        answer = answerList[questionNumber]
+        questionNumber++
     }
 }
 
