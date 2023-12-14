@@ -12,7 +12,9 @@ const aList = ["i++", "let i", "if", "options[1]"]
 const bList = ["i--", "var i", "if else", "options.0"]
 const cList = ["i**", "const i", "else if", "options.1"]
 const dList = ["--i", " for i", "else", "options[0]"]
+
 const scoreboard = localStorage.getItem("scores").split(',')
+
 let time = 75
 let questionNumber = 0
 let answer = "Switch"
@@ -33,9 +35,8 @@ const gameOver = () => {
     question.appendChild(submit)
 
     const storeScore = () => {
-        scoreboard.push(time + " - " + initials.value)
+        scoreboard.push(time + " - " + initials.value.replaceAll(',', ''))
         localStorage.setItem("scores", scoreboard.join(','))
-
         window.location.href = "index.HTML" //needs to change to high scores page
     }
 
