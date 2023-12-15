@@ -41,7 +41,7 @@ const gameOver = () => {
         }
         scoreboard.push(time + " - " + initials.value.replaceAll(',', ''))
         localStorage.setItem("scores", scoreboard.join(','))
-        window.location.href = "highscores.HTML" //needs to change to high scores page
+        window.location.href = "highscores.HTML" 
     }
 
     submit.addEventListener('click', storeScore)
@@ -51,7 +51,7 @@ const decrementTime = () =>{
     time--
     countdown.textContent = "Time: " + time
     if(time < 1){
-        time = 0
+        time = 0 //Does not allow for negative time
         clearInterval(timer)
         gameOver()
     }
@@ -65,7 +65,7 @@ const checkAnswer = (btn) =>{
         result.textContent = "Incorrect!"
         time -= 15
         if(time < 1){
-            time = 0
+            time = 0 //Does not allow for negative time
             clearInterval(timer)
             gameOver()
         }
