@@ -41,7 +41,7 @@ const gameOver = () => {
         }
         scoreboard.push(time + " - " + initials.value.replaceAll(',', ''))
         localStorage.setItem("scores", scoreboard.join(','))
-        window.location.href = "highscores.HTML" 
+        window.location.href = "highscores.html" 
     }
 
     submit.addEventListener('click', storeScore)
